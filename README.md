@@ -1,2 +1,2 @@
-# user-authentication-api
-Projeto de autenticação de usuário com Node, desenvolvido durante um curso da DIO.
+Criando uma API REST na prática com Node.js + Express
+Estilo Arquitetural REST
