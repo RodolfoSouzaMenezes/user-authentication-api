@@ -1,5 +1,7 @@
 import express from "express";
+import basicAuthenticationMiddleware from "./middlewares/basic-authentication.middlerware";
 import errorHandler from './middlewares/error-handler.middleware';
+import authorizationRoute from "./routes/athorization.route";
 import statusRoute from "./routes/status.route";
 import usersRoute from "./routes/users.route";
 
@@ -12,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 //Configurações de rotas
 app.use(usersRoute);
 app.use(statusRoute);
+app.use(authorizationRoute);
 
 //Configuração dos handlers de erro
 app.use(errorHandler);
@@ -19,4 +22,4 @@ app.use(errorHandler);
 //Inicializando o servidor
 app.listen(3000, () => {
     console.log('Aplicação executando na porta 3000!');
-})
+});

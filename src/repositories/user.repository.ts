@@ -33,6 +33,24 @@ class userRepository {
         } 
     }
 
+    //Buscando usuário e senha no BD
+    async findByUsernameAndPassword(username: string, password: string): Promise<User | null> {
+        try {
+            const query = `
+            SELECT uuid, username
+            FROM application_user
+            WHERE username = $1
+            AND password = crypt($2, 'my_salt')
+            `;
+            const values = [username, password];
+            const { rows } = await db.query<User>(query, values);
+            const [user] = rows;
+            return user || null;
+        } catch (error) {
+            throw new DatabaseError('Erro na consulta por username e password', error);
+        }
+    }
+
     //Criando um novo usuário
     async create(user: User): Promise<string> {
         const script = `
